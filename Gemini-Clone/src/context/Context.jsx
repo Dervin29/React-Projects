@@ -10,17 +10,33 @@ const ContextProvider = (props) => {
   const [showResult, setShowResult] = useState(false);
   const [loading, setLoading] = useState(false);
   const [resultData, setResultData] = useState("");
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
+  // Toggle dark mode
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
+  // Delayed paragraph effect
   const delayPara = (index, nextWord) => {
     setTimeout(() => {
       setResultData((prev) => prev + nextWord);
     }, 75 * index);
   };
 
+  // Function to handle new chat initiation
+  const newChat = () => {
+    setLoading(false);
+    setShowResult(false);
+  };
+
+  // Function to process user input and trigger Gemini API
   const onSent = async (prompt) => {
     setResultData("");
     setLoading(true);
     setShowResult(true);
+
+    // Prepare the prompt for execution
     let response;
     if (prompt !== undefined) {
       response = await run(prompt);
@@ -31,6 +47,18 @@ const ContextProvider = (props) => {
       response = await run(input);
     }
 
+    // Process response for formatting
+    let formattedResponse = formatResponse(response);
+
+    // Display formatted response with delay effect
+    displayFormattedResponse(formattedResponse);
+
+    setLoading(false);
+    setInput("");
+  };
+
+  // Function to format Gemini response according to specified format
+  const formatResponse = (response) => {
     let responseArray = response.split("**");
     let newResponse = "";
     for (let i = 0; i < responseArray.length; i++) {
@@ -42,16 +70,16 @@ const ContextProvider = (props) => {
     }
 
     let newResponse2 = newResponse.split("*").join("</br>");
+    return newResponse2;
+  };
 
-    let newResponseArray = newResponse2.split(" ");
-
+  // Function to display formatted response with delayed effect
+  const displayFormattedResponse = (formattedResponse) => {
+    let newResponseArray = formattedResponse.split(" ");
     for (let i = 0; i < newResponseArray.length; i++) {
       const nextWord = newResponseArray[i];
       delayPara(i, nextWord + " ");
     }
-
-    setLoading(false);
-    setInput("");
   };
 
   const contextValue = {
@@ -65,6 +93,9 @@ const ContextProvider = (props) => {
     input,
     setInput,
     onSent,
+    newChat,
+    isDarkMode,
+    toggleDarkMode,
   };
 
   return (

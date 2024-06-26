@@ -1,0 +1,15 @@
+.toggle-switch {
+    display: flex;
+    align-items: center;
+  }
+  
+  .toggle-label {
+    cursor: pointer;
+    padding-left: 8px;
+    user-select: none;
+  }
+  
+  #dark-mode-toggle {
+    display: none;
+  }
+  
