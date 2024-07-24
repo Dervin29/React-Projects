@@ -12,7 +12,7 @@ This repository contains a Gemini clone project developed using React.js and pur
 
 ## Introduction
 
-The Gemini Clone is a web application that replicates the functionalities of the Gemini platform. It has been built using React.js for the frontend and styled with pure CSS to ensure a clean and responsive design. The project interacts with the Gemini API to fetch and display data.
+The Gemini Clone is a web application replicating the functionalities of the Gemini platform. It has been built using React.js for the front end and styled with pure CSS to ensure a clean and responsive design. The project interacts with the Gemini API to fetch and display data.
 
 ## Features
 
@@ -29,5 +29,7 @@ To run the project locally, follow these steps:
 1. **Clone the repository:**
    ```sh
    git clone https://github.com/Dervin29/React-Projects.git
-2. **Hosted Link:**
-   [Click the Link]("https://gemini-clone-24.netlify.app")
+
+## Hosted Link
+[Link Text](https://gemini-clone-24.netlify.app/)
+
